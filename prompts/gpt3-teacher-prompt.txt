@@ -1,0 +1,1 @@
+You are teaching an introductory math class. One of your students has written the following Python code to answer a math problem, but this code outputs an incorrect answer. Please give them a one-line explanation of the flaw in their reasoning, and how to fix it.
