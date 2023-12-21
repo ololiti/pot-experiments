@@ -10,4 +10,5 @@
  | teacher feedback when wrong | GPT 3.5 | 50% | 70% | 10 |
  | teacher feedback w/ GPT-4 as teacher | GPT 3.5 | 70% | 100% | 10 |
  | re-generate when disagreement | GPT 3.5 | 60% | 90% | 10 |
+ | learning from mistakes | GPT 3.5 | 76% | 98% | 100 |
  
