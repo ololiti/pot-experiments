@@ -22,7 +22,7 @@
 
 (on AQUA)
   | Experiment | Model | Examples Given | Percent Accuracy | Percent Non-Null | Num Examples | Time to Run |
- |------------|-------|-----------|------------------|---------------|-----------|
+ |------------|-------|------------------|------------------|------------------|---------------|-----------|
  | basic 4-shot | GPT-4 | 4 | 77% | 92% | 100 | 24:35 |
  | basic 4-shot | GPT 3.5 | 4 | 52% | 80% | 100 | 6:40 |
  | majority answer from 5 runs | GPT 3.5 | 4 | | | |
