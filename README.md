@@ -17,6 +17,12 @@
    |------------|-------|-----------|------------------|---------------|-------------------|
  | learning from mistakes | GPT 3.5 | 76% | 98% | 100 | |
  | learning from mistakes w/ majority answer | GPT 3.5 | 81% | 100% | 100 | |
+
+  (on GSM8K, with 0-shot)
+  | Experiment | Model | Percent Accuracy | Percent Non-Null | Num Examples | Time to Run |
+   |------------|-------|-----------|------------------|---------------|-------------------|
+ | basic 0-shot | GPT 3.5 | 50% | 60% | 10 | 0:44 |
+ | basic 0-shot | GPT 4 | 80% | 100% | 100 | 3:29 |
  
 (on GSM8K, with 8-shot training)
   | Experiment | Model | Percent Accuracy | Percent Non-Null | Num Examples | Time to Run |
@@ -28,5 +34,5 @@
   | Experiment | Model | Percent Accuracy | Percent Non-Null | Num Examples | Time to Run |
  |------------|-------|-----------|------------------|---------------|-----------|
  | basic 4-shot | GPT-4 | 77% | 92% | 100 | 24:35 |
- | basic 4-shot | GPT 3.5 |  | | |
+ | basic 4-shot | GPT 3.5 | 52% | 80% | 100 | 6:40 |
  | majority answer from 5 runs | GPT 3.5 | | | |
