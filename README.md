@@ -13,8 +13,15 @@
  | learning from mistakes | GPT 3.5 | 76% | 98% | 100 |
  | learning from mistakes w/ majority answer | GPT 3.5 | 81% | 100% | 100 |
  
- results so far (on GSM8K, with 8-shot training)
+(on GSM8K, with 8-shot training)
   | Experiment | Model | Percent Accuracy | Percent Non-Null | Num Examples |
  |------------|-------|-----------|------------------|---------------|
  | basic 8-shot | GPT-3.5 | 66% | 97% | 100 |
  | majority answer from 5 runs | GPT 3.5 | 76% | 100% | 100 |
+
+(on AQUA, with 4-shot training)
+  | Experiment | Model | Percent Accuracy | Percent Non-Null | Num Examples |
+ |------------|-------|-----------|------------------|---------------|
+ | basic 4-shot | GPT-4 |  |  |  |
+ | basic 4-shot | GPT 3.5 |  | | |
+ | majority answer from 5 runs | GPT 3.5 | | | |
