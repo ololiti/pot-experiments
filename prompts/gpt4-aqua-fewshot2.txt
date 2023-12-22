@@ -1,0 +1,60 @@
+# Question: A car is being driven, in a straight line and at a uniform speed, towards the base of a vertical tower. The top of the tower is observed from the car and, in the process, it takes 10 minutes for the angle of elevation to change from 45° to 60°. After how much more time will this car reach the base of the tower?
+# Answer Options: ['A)5(√3 + 1)', 'B)6(√3 + √2)', 'C)7(√3 – 1)', 'D)8(√3 – 2)', 'E)None of these']
+
+# Solution: 
+# Q1: How long will it take for the car to reach the tower?
+# E1: This equals the distance it has to the tower, divided by its speed.
+# Q2: What is the distance it has to the tower?
+# R2: The car, the base of the tower, and the top of the tower form a right triangle with an angle of 60 degrees.
+# E2: This means that the car's distance to the tower and the tower height form a 1:sqrt(3) ratio.
+tower_height = Symbol("tower_height", positive=True)
+distance = tower_height/sympy.sqrt(3) #E2
+# Q3: What is its speed?
+# E3: This equals the distance it traveled in the past 10 minutes, divided by 10.
+# Q4: What is the distance it traveled?
+# E4: This equals its distance 10 minutes ago minus its distance now.
+# Q5: What was its distance 10 minutes ago?
+# R5: Ten minutes ago, the car, the base of the tower, and the top of the tower formed a right triange with an angle of 45 degrees.
+# E5: This means that the car's distance to the tower and the tower height formed a 1:1 ratio.
+old_distance = tower_height #E5
+distance_traveled = old_distance - distance #E4
+speed = distance_traveled/10 #E3
+# R1: Since the tower height is a variable in both the speed and the distance, we can use simplify to cancel it out.
+time = simplify(distance/speed) #E1
+ans = time
+
+# Question: The original price of an item is discounted 22%. A customer buys the item at this discounted price using a $20-off coupon. There is no tax on the item, and this was the only item the customer bought. If the customer paid $1.90 more than half the original price of the item, what was the original price of the item?
+# Answer Options: ['A)$61', 'B)$65', 'C)$67.40', 'D)$70', 'E)$78.20']
+
+# Solution: 
+
+# Question: Find out which of the following values is the multiple of X, if it is divisible by 9 and 12?
+# Answer Options: ['A)36', 'B)15', 'C)17', 'D)5', 'E)7']
+
+# Solution: 
+
+# Question: If the probability that Stock A will increase in value during the next month is 0.56, and the probability that Stock B will increase in value during the next month is 0.74. What is the greatest value for the probability that neither of these two events will occur?
+# Answer Options: ['A)0.22', 'B)0.26', 'C)0.37', 'D)0.46', 'E)0.63']
+
+# Solution: 
+
+# Question: A trader sold an article at a profit of 20% for Rs.360. What is the cost price of the article?
+# Answer Options: ['A)270', 'B)300', 'C)280', 'D)320', 'E)315']
+
+# Solution: 
+
+# Question: 20 marbles were pulled out of a bag of only white marbles, painted black, and then put back in. Then, another 20 marbles were pulled out, of which 1 was black, after which they were all returned to the bag. If the percentage of black marbles pulled out the second time represents their percentage in the bag, how many marbles in total Q does the bag currently hold?
+# Answer Options: ['A)40', 'B)200', 'C)380', 'D)400', 'E)3200']
+
+# Solution: 
+
+# Question: Find the total no. of distinct bike no.'s that can beformed using 2 letters followed by 2 no.'s. How many letters need to be distinct?
+# Answer Options: ['A)74453', 'B)64543', 'C)74325', 'D)65000', 'E)97656']
+
+# Solution: 
+
+# Question: A train running at a speed of 100 miles/hour, takes 10 hours to reach its destination. After covering quarter of the distance, it starts raining and the train has to be slowed to speed of 75 miles/hour. What is the total journey duration?
+# Answer Options: ['A)10', 'B)11.5', 'C)12.5', 'D)13.5', 'E)15']
+
+# Solution: 
+

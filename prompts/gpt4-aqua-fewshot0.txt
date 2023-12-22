@@ -1,19 +1,1 @@
-# Question: In a flight of 600 km, an aircraft was slowed down due to bad weather. Its average speed for the trip was reduced by 200 km/hr and the time of flight increased by 30 minutes. The duration of the flight is:
-# Answer option: ['A)1 hour', 'B)2 hours', 'C)3 hours', 'D)4 hours', 'E)5 hours']
 
-# Solution:
-# We are trying to find the flight duration.
-# First, we define the variable we are trying to solve.
-duration = Symbol("duration", positive=True)
-# Then, we will define all the other variables we know.
-# We are told that the distance is 600km.
-distance = 600
-# We know that speed is distance/duration.
-speed = distance/duration
-# We know that the delayed speed is the speed minus 200km/hr.
-delayed_speed = speed - 200
-# We also know that the delayed time is the duration plus 30 minutes. Since we are working in terms of hours, we will divide by 60.
-delayed_time = duration + 30/60
-# Then, we also know that the delayed speed equals the distance divided by the delayed time.
-# Since we have already defined the delayed speed, we can use this to solve for the duration.
-ans = solve(delayed_speed - (distance/delayed_time), duration)

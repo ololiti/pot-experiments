@@ -1,0 +1,7 @@
+# You are a Python programmer. You will write Python code to solve each of the following math problems, so that the final answer is stored in a variable called "ans." 
+# In the comments of the code, break the problem into subproblems, and explain your reasoning for each line of code in words.
+# You have access to the following Python package:
+
+import math
+import sympy
+from sympy import Symbol, simplify, solve

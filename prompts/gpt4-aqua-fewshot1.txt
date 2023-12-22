@@ -1,0 +1,66 @@
+# Question: A car is being driven, in a straight line and at a uniform speed, towards the base of a vertical tower. The top of the tower is observed from the car and, in the process, it takes 10 minutes for the angle of elevation to change from 45° to 60°. After how much more time will this car reach the base of the tower?
+# Answer Options: ['A)5(√3 + 1)', 'B)6(√3 + √2)', 'C)7(√3 – 1)', 'D)8(√3 – 2)', 'E)None of these']
+
+# Solution: 
+# Q1: How long will it take for the car to reach the tower?
+# E1: This equals the distance it has to the tower, divided by its speed.
+# Q2: What is the distance it has to the tower?
+# R2: The car, the base of the tower, and the top of the tower form a right triangle with an angle of 60 degrees.
+# E2: This means that the car's distance to the tower and the tower height form a 1:sqrt(3) ratio.
+tower_height = Symbol("tower_height", positive=True)
+distance = tower_height/sympy.sqrt(3) #E2
+# Q3: What is its speed?
+# E3: This equals the distance it traveled in the past 10 minutes, divided by 10.
+# Q4: What is the distance it traveled?
+# E4: This equals its distance 10 minutes ago minus its distance now.
+# Q5: What was its distance 10 minutes ago?
+# R5: Ten minutes ago, the car, the base of the tower, and the top of the tower formed a right triange with an angle of 45 degrees.
+# E5: This means that the car's distance to the tower and the tower height formed a 1:1 ratio.
+old_distance = tower_height #E5
+distance_traveled = old_distance - distance #E4
+speed = distance_traveled/10 #E3
+# R1: Since the tower height is a variable in both the speed and the distance, we can use simplify to cancel it out.
+time = simplify(distance/speed) #E1
+ans = time
+
+# Question: The original price of an item is discounted 22%. A customer buys the item at this discounted price using a $20-off coupon. There is no tax on the item, and this was the only item the customer bought. If the customer paid $1.90 more than half the original price of the item, what was the original price of the item?
+# Answer Options: ['A)$61', 'B)$65', 'C)$67.40', 'D)$70', 'E)$78.20']
+
+# Solution: 
+# Q1: What was the original price of the item?
+# E1: This equals the price the customer paid, plus the total value of any discounts.
+# Q2: What was the price the customer paid?
+# E2: This is half the original price, plus 1.90.
+original_price = Symbol("original_price", positive=True)
+price_paid = original_price*0.5 + 1.9 #E2
+# Q3: What is the total value of the discounts?
+# E3: This is 22% of the original price, plus $20.
+discounts = 0.22*original_price + 20 #E3
+# R1: Since we have a linear equation in terms of the original price, we can solve to get the price.
+original_price = solve(original_price - price_paid - discounts, original_price) #E1
+ans = original_price 
+
+# Question: Find out which of the following values is the multiple of X, if it is divisible by 9 and 12?
+# Answer Options: ['A)36', 'B)15', 'C)17', 'D)5', 'E)7']
+
+# Solution: 
+# Q1: Which of the numbers in the options is divisible by 9 and 12?
+# E1: For each number in the options, we can check whether it is 0 mod 9 and 0 mod 12.
+ans = None
+for number in [36, 15, 17, 5, 7]:
+    if number % 9 == 0 and number % 12 == 0:
+        ans = number
+
+# Question: If the probability that Stock A will increase in value during the next month is 0.56, and the probability that Stock B will increase in value during the next month is 0.74. What is the greatest value for the probability that neither of these two events will occur?
+# Answer Options: ['A)0.22', 'B)0.26', 'C)0.37', 'D)0.46', 'E)0.63']
+
+# Solution: 
+# Q1: What is the greatest possible probability that neither stock increases?
+# E1: This is 1 minus the probability that Stock A increases, minus the probability that Stock B increases, plus the probability that both increase.
+p_a_increase = 0.56
+p_b_increase = 0.74
+# Q2: What is the greatest possible probability that both stocks increase?
+# E2: This is at most the minimum of the two probabilities.
+greatest_p_both = min(p_a_increase, p_b_increase) #E2
+greatest_p_neither = 1 - p_a_increase - p_b_increase + greatest_p_both #E1
+ans = greatest_p_neither

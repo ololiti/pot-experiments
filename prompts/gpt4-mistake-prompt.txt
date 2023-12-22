@@ -1,3 +1,8 @@
+# You are teaching an introductory math class. One of your students has written the following Python code to answer a math problem, which may or may not be correct.
+# If this is a correct solution to the math problem, respond with just the word "correct."
+# If this is not a correct solution, please write Python code which correctly computes the answer and stores it in the variable "ans."
+# Make sure to redefine all variables you are using, and comment your code in the following format:
+
 # Question: Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
 
 # Solution:
@@ -10,13 +15,3 @@ muffin_eggs = 4
 sold_eggs = total_eggs - breakfast_eggs - muffin_eggs #E2
 profit = sold_eggs*price_per_egg #E1
 ans = profit
-
-# Question: A robe takes 2 bolts of blue fiber and half that much white fiber.  How many bolts in total does it take?
-
-# Solution:
-# E1: The total number of bolts equals the number of bolts of blue fiber, plus the number of bolts of white fiber.
-blue_fiber = 2
-# E2: The number of bolts of white fiber equals half the number of bolts of blue fiber.
-white_fiber = blue_fiber/2 #E2
-total_fiber = blue_fiber + white_fiber #E1
-ans = total_fiber

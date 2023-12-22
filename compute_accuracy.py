@@ -18,8 +18,8 @@ def process_json_file(file_path):
                 if executed_answer == correct_answer:
                     correct_match_count += 1
                 else:
-                    print(item['question'])
-                    print(item['response'])
+                    # print(item['question'])
+                    # print(item['response'])
                     print(f"executed answer {item['executed answer']}, correct answer {item['correct answer']}")
 
                 # Check if executed answer is not None
