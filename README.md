@@ -6,10 +6,10 @@
  |------------|-------|----------------|-------|------------------|---------------|-------------------|
  | basic 4-shot  | GPT-4 | 4 | 92.35%           | 100%             | 353          | |
  | basic 4-shot | GPT-3.5-turbo | 4 | 68%           | 100%             | 100          | |
- | majority answer from 5 runs | 4 | GPT 3.5 | 80% |100% | 100 | |
+ | majority answer from 5 runs | GPT 3.5 | 4 | 80% |100% | 100 | |
  | rerun until agree | GPT 3.5 | 4 | 74%| 100% | 100 | 12:26 |
- | teacher feedback when wrong | 4 | GPT 3.5 | 50% | 70% | 10 | |
- | teacher feedback w/ GPT-4 as teacher | 4 | GPT 3.5 | 70% | 100% | 10 | |
+ | teacher feedback when wrong |GPT 3.5 | 4 | 50% | 70% | 10 | |
+ | teacher feedback w/ GPT-4 as teacher | GPT 3.5 |  4| 70% | 100% | 10 | |
  | re-generate when disagreement | GPT 3.5 | 4 | 60% | 90% | 10 | |
   | learning from mistakes | GPT 3.5 | variable | 76% | 98% | 100 | |
  | learning from mistakes w/ majority answer | GPT 3.5 | variable | 81% | 100% | 100 | |
