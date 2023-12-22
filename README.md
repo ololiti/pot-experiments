@@ -17,6 +17,7 @@
  | basic 0-shot | GPT 4 | 0 | 80% | 100% | 100 | 3:29 |
  | basic 8-shot | GPT-3.5 | 8|  66% | 97% | 100 | |
  | majority answer from 5 runs | GPT 3.5 | 8 | 76% | 100% | 100 | |
+  | 4-shot from previously incorrect | GPT 4 | 4 | 100% | 100% | 10 | 2:27 |
 
 
 
