@@ -19,7 +19,7 @@
  
 (on GSM8K, with 8-shot training)
   | Experiment | Model | Percent Accuracy | Percent Non-Null | Num Examples | Time to Run |
- |------------|-------|-----------|------------------|---------------|
+ |------------|-------|-----------|------------------|---------------|------|
  | basic 8-shot | GPT-3.5 | 66% | 97% | 100 | |
  | majority answer from 5 runs | GPT 3.5 | 76% | 100% | 100 | |
 
