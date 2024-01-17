@@ -10,6 +10,8 @@ import sympy
 from sympy.solvers import solve
 from sympy import Symbol, Eq
 from sympy import simplify
+from ask_user import ask_with_feedback
+
 
 
 
@@ -22,7 +24,7 @@ parser.add_argument("--system_prompt", default="aqua_system.txt", type=str)
 parser.add_argument("--example_prompt", default="gpt4-aqua-fewshot1.txt", type=str)
 parser.add_argument("--mode", default="normal", type=str)
 parser.add_argument("--teacher_prompt", default="gpt3-teacher-prompt2.txt", type=str)
-parser.add_argument("--mistake_prompt", default="gpt4-mistake-prompt.txt", type=str)
+parser.add_argument("--mistake_prompt", default="aqua-mistake-prompt.txt", type=str)
 parser.add_argument("--best_of", default=1, type=int)
 
 args = parser.parse_args()
@@ -46,7 +48,7 @@ def generate_example(ex_prompt, example):
     example_string = f"# Question: {example['question']}\n# Answer Options: {example['options']}\n\n# Solution: \n"
     return ex_prompt + "\n\n" + example_string
 
-def ask_gpt(system_prompt, user_prompt, model="gpt-4", max_tokens=None):
+def ask_gpt(system_prompt, user_prompt, model="gpt-3.5-turbo", max_tokens=None):
     client = OpenAI(api_key=API_KEY)
     got_result = False
     while not got_result:
@@ -94,9 +96,10 @@ def ask_mistake(mistake_file, question, answer, verbose):
         sys_prompt = f.read()
     ex_prompt = "# Question: " + question + "\n\n" + "# Student Solution: \n" + answer
     result = ask_gpt(sys_prompt, ex_prompt, "gpt-4")
+    executed_ans = safe_execute(result, verbose)
     if verbose:
         print(f"\n{result}")
-    executed_ans = safe_execute(result, verbose)
+        print(f"ans is now {executed_ans}")
     if executed_ans is not None:
         return result
     return None
@@ -206,7 +209,7 @@ def safe_execute(code_string: str, verbose=False, keys=None):
                 return [locals_.get(k, None) for k in keys]
         except Exception as e:
             if verbose:
-                print(e)
+                print(f"Error in execution: {e}")
             return None
     try:
         ans = func_timeout.func_timeout(5, execute, args=(code_string,))
@@ -225,8 +228,8 @@ def rerun(system_prompt, user_prompt, n, verbose):
         if executed_ans is not None:
             answers.update([executed_ans])
     if len(answers) == 0:
-        return result, None
-    return result, answers.most_common(1)[0][0]
+        return result, None, 0
+    return result, answers.most_common(1)[0][0], answers.most_common(1)[0][1]
 
 def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
     total = len(test_data)
@@ -234,12 +237,13 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
     non_null = 0
     system_prompt = prompts[0]
     ex_prompt = prompts[1]
-    examples_in_ex_prompt = 2
+    orig_ex_prompt = ex_prompt
+    examples_in_ex_prompt = 4
 
     print(f"num examples: {len(test_data)}")
     output_file = f"outputs/{name}.json"
 
-    writer = open(output_file, 'a')
+    writer = open(output_file, 'w')
     writer.write(json.dumps({"system prompt": system_prompt, "few shot prompt": ex_prompt}) + "\n")
 
     total = 0
@@ -254,7 +258,7 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
         if mode == "student":
             result, executed_ans = pair_student(system_prompt, user_prompt, example["question"], verbose)
         else:
-            result, executed_ans = rerun(system_prompt, user_prompt, reruns, verbose)
+            result, executed_ans, frequency = rerun(system_prompt, user_prompt, reruns, verbose)
         
         if verbose:
             print(f"executed answer: {executed_ans}, expected: {example['correct']}")
@@ -295,6 +299,19 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
                         teacher_result = teacher_result[teacher_result.find('\n')+1:]
                     ex_prompt += f"\n\n# Question: {example['question']}\n\n# Solution:\n{teacher_result}"
                     examples_in_ex_prompt += 1
+        elif mode == "certainty":
+            if examples_in_ex_prompt < 10 and frequency <= 0.4*reruns:
+                new_user_prompt = generate_example(orig_ex_prompt, example)
+                gpt4_result = ask_gpt(system_prompt, new_user_prompt, model="gpt-4", max_tokens=150)
+                new_ans = safe_execute(gpt4_result, verbose)
+                if verbose:
+                    print("")
+                    print("# GPT-4 result: ")
+                    print(gpt4_result)
+                    print(new_ans)
+                if new_ans is not None and new_ans != executed_ans:
+                    ex_prompt = f"# Question: {example['question']}\n\n# Solution:\n{gpt4_result}\n\n{ex_prompt}"
+                    examples_in_ex_prompt += 1
         
         selected_choice = 'A'
         if executed_ans is not None:
@@ -320,7 +337,7 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
     print(f"percent executed: {non_null/total}")
 
 if __name__ == "__main__":
-    test_data = load_data(args.data_file)[81: 108]
+    test_data = load_data(args.data_file)[8:]
     prompts = load_prompt(args.system_prompt, args.example_prompt)
     run_test(args.verbose, args.name, test_data, prompts, args.best_of, args.mode, teacher_file=args.teacher_prompt, mistake_file=args.mistake_prompt)
 

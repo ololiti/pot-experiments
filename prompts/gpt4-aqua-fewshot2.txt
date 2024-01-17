@@ -27,34 +27,105 @@ ans = time
 # Answer Options: ['A)$61', 'B)$65', 'C)$67.40', 'D)$70', 'E)$78.20']
 
 # Solution: 
+# Q1: What was the original price of the item?
+# E1: This equals the price the customer paid, plus the total value of any discounts.
+# Q2: What was the price the customer paid?
+# E2: This is half the original price, plus 1.90.
+original_price = Symbol("original_price", positive=True)
+price_paid = original_price*0.5 + 1.9 #E2
+# Q3: What is the total value of the discounts?
+# E3: This is 22% of the original price, plus $20.
+discounts = 0.22*original_price + 20 #E3
+# R1: Since we have a linear equation in terms of the original price, we can solve to get the price.
+original_price = solve(original_price - price_paid - discounts, original_price) #E1
+ans = original_price 
 
 # Question: Find out which of the following values is the multiple of X, if it is divisible by 9 and 12?
 # Answer Options: ['A)36', 'B)15', 'C)17', 'D)5', 'E)7']
 
 # Solution: 
+# Q1: Which of the numbers in the options is divisible by 9 and 12?
+# E1: For each number in the options, we can check whether it is 0 mod 9 and 0 mod 12.
+ans = None
+for number in [36, 15, 17, 5, 7]:
+    if number % 9 == 0 and number % 12 == 0:
+        ans = number
 
 # Question: If the probability that Stock A will increase in value during the next month is 0.56, and the probability that Stock B will increase in value during the next month is 0.74. What is the greatest value for the probability that neither of these two events will occur?
 # Answer Options: ['A)0.22', 'B)0.26', 'C)0.37', 'D)0.46', 'E)0.63']
 
 # Solution: 
+# Q1: What is the greatest possible probability that neither stock increases?
+# E1: This is 1 minus the probability that Stock A increases, minus the probability that Stock B increases, plus the probability that both increase.
+p_a_increase = 0.56
+p_b_increase = 0.74
+# Q2: What is the greatest possible probability that both stocks increase?
+# E2: This is at most the minimum of the two probabilities.
+greatest_p_both = min(p_a_increase, p_b_increase) #E2
+greatest_p_neither = 1 - p_a_increase - p_b_increase + greatest_p_both #E1
+ans = greatest_p_neither
 
 # Question: A trader sold an article at a profit of 20% for Rs.360. What is the cost price of the article?
 # Answer Options: ['A)270', 'B)300', 'C)280', 'D)320', 'E)315']
 
 # Solution: 
+# Q1: What is the cost of the article?
+# R1: The problem tells us the sale price is 1.2 times the cost.
+# E1: The cost is the sale price divided by 1.2.
+sale_price = 360
+cost = sale_price/1.2 #E1
+ans = cost
 
 # Question: 20 marbles were pulled out of a bag of only white marbles, painted black, and then put back in. Then, another 20 marbles were pulled out, of which 1 was black, after which they were all returned to the bag. If the percentage of black marbles pulled out the second time represents their percentage in the bag, how many marbles in total Q does the bag currently hold?
 # Answer Options: ['A)40', 'B)200', 'C)380', 'D)400', 'E)3200']
 
 # Solution: 
+# Q1: How many marbles does the bag currently hold?
+# E1: This equals the number of black marbles, divided by the percent of black marbles.
+num_black = 20
+# Q2: What is the percent of black marbles?
+# E2: The problem tells us this is 1 out of 20.
+percent_black = 1/20 #E2
+total_marbles = num_black/percent_black #E1
+ans = total_marbles
+
 
 # Question: Find the total no. of distinct bike no.'s that can beformed using 2 letters followed by 2 no.'s. How many letters need to be distinct?
 # Answer Options: ['A)74453', 'B)64543', 'C)74325', 'D)65000', 'E)97656']
 
 # Solution: 
+# Q1: What is the total number of distinct bike IDs?
+# E1: This is the number of distinct strings of two letters, times the number of distinct strings of two digits.
+# Q2: What is the number of distinct strings of two letters?
+# E2: This is the number of letters, to the power of 2.
+num_letters = 26
+two_letter_strings = num_letters ** 2 #E2
+# Q3: What is the number of distinct strings of two digits?
+# E3: This is the number of digits, to the power of 2.
+num_digits = 10
+two_digit_strings = num_digits ** 2 #E3
+distinct_ids = two_letter_strings * two_digit_strings
+ans = distinct_ids
 
 # Question: A train running at a speed of 100 miles/hour, takes 10 hours to reach its destination. After covering quarter of the distance, it starts raining and the train has to be slowed to speed of 75 miles/hour. What is the total journey duration?
 # Answer Options: ['A)10', 'B)11.5', 'C)12.5', 'D)13.5', 'E)15']
 
 # Solution: 
+# Q1: What is the total duration of the delayed train?
+# E1: This is the total time it takes to cover the first 1/4 of the trip, plus the total time it takes to cover the rest of the trip.
+# Q2: What is the time it takes to cover the first 1/4 of the trip?
+# E2: This is 1/4 of the total distance, divided by the speed at the beginning.
+# Q3: What is the total distance?
+# E3: This is the speed it normally runs at, times the time it normally takes.
+normal_speed = 100
+normal_time = 10
+distance = normal_speed*normal_time #E3
+beginning_speed = normal_speed
+first_quarter_time = (1/4)*distance/beginning_speed #E2
+# Q4: What is the time it takes to cover the rest of the trip?
+# E4: This is 3/4 of the total distance, divided by the speed in the rain.
+rain_speed = 75
+remaining_time = (3/4)*distance/rain_speed #E4
+total_time = first_quarter_time + remaining_time #E1
+ans = total_time
 

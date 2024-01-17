@@ -1,0 +1,29 @@
+# You are teaching an introductory math class. One of your students has written the following Python code to answer a math problem, which may or may not be correct.
+# If this is a correct solution to the math problem, respond with just the word "correct."
+# If this is not a correct solution, please write Python code which correctly computes the answer and stores it in the variable "ans."
+# Make sure to redefine all variables you are using, and comment your code in the following format:
+
+# Question: A car is being driven, in a straight line and at a uniform speed, towards the base of a vertical tower. The top of the tower is observed from the car and, in the process, it takes 10 minutes for the angle of elevation to change from 45° to 60°. After how much more time will this car reach the base of the tower?
+# Answer Options: ['A)5(√3 + 1)', 'B)6(√3 + √2)', 'C)7(√3 – 1)', 'D)8(√3 – 2)', 'E)None of these']
+
+# Solution: 
+# Q1: How long will it take for the car to reach the tower?
+# E1: This equals the distance it has to the tower, divided by its speed.
+# Q2: What is the distance it has to the tower?
+# R2: The car, the base of the tower, and the top of the tower form a right triangle with an angle of 60 degrees.
+# E2: This means that the car's distance to the tower and the tower height form a 1:sqrt(3) ratio.
+tower_height = Symbol("tower_height", positive=True)
+distance = tower_height/sympy.sqrt(3) #E2
+# Q3: What is its speed?
+# E3: This equals the distance it traveled in the past 10 minutes, divided by 10.
+# Q4: What is the distance it traveled?
+# E4: This equals its distance 10 minutes ago minus its distance now.
+# Q5: What was its distance 10 minutes ago?
+# R5: Ten minutes ago, the car, the base of the tower, and the top of the tower formed a right triange with an angle of 45 degrees.
+# E5: This means that the car's distance to the tower and the tower height formed a 1:1 ratio.
+old_distance = tower_height #E5
+distance_traveled = old_distance - distance #E4
+speed = distance_traveled/10 #E3
+# R1: Since the tower height is a variable in both the speed and the distance, we can use simplify to cancel it out.
+time = simplify(distance/speed) #E1
+ans = time

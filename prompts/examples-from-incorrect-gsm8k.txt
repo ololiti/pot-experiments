@@ -1,0 +1,57 @@
+# Question: Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
+
+# Solution:
+# E1: Her total profit is the number of eggs she sells, times the price per egg.
+price_per_egg = 2
+# E2: The number of eggs she sells equals the total number of eggs minus the eggs she eats or bakes muffins with.
+total_eggs = 16
+breakfast_eggs = 3
+muffin_eggs = 4
+sold_eggs = total_eggs - breakfast_eggs - muffin_eggs #E2
+profit = sold_eggs*price_per_egg #E1
+ans = profit
+
+
+# Question: Josh decides to try flipping a house.  He buys a house for $80,000 and then puts in $50,000 in repairs.  This increased the value of the house by 150%.  How much profit did he make?
+
+# Solution:
+# E1: The profit equals the value he sold it for minus the amount he spent.
+# E2: He sold it for the cost of the house plus 150% of that.
+house_cost = 80000
+sold_for = house_cost + house_cost*1.5 #E2
+# E3: He spent the cost of the house plus the cost of repairs.
+repair_cost = 50000
+total_cost = house_cost + repair_cost #E3
+ans = total_cost
+
+# Question: Carlos is planting a lemon tree. The tree will cost $90 to plant. Each year it will grow 7 lemons, which he can sell for $1.5 each. It costs $3 a year to water and feed the tree. How many years will it take before he starts earning money on the lemon tree?
+
+# Solution:
+# E1: The number of years it takes is equal to the initial cost divided by the profit per year, plus one to ensure a positive profit.
+initial_cost = 90
+# E2: The profit per year is the number of lemons times the profit per lemon, minus the cost of watering and feeding the tree.
+num_lemons = 7
+profit_per_lemon = 1.5
+water_feed_cost = 3
+profit_per_year = num_lemons*profit_per_lemon - water_feed_cost #E2
+years = initial_cost//profit_per_year + 1 #E1
+ans = years
+
+# Question: John drives for 3 hours at a speed of 60 mph and then turns around because he realizes he forgot something very important at home.  He tries to get home in 4 hours but spends the first 2 hours in standstill traffic.  He spends the next half-hour driving at a speed of 30mph, before being able to drive the remaining time of the 4 hours going at 80 mph.  How far is he from home at the end of those 4 hours?
+
+# Solution:
+# E1: His distance from home at the end of the 4 hours equals the distance he drove away, minus the distance he drove back.
+# E2: The distance he drove away equals the speed he drove away, times the time he drove away.
+speed_away = 60
+time_away = 3
+distance_away = speed_away*time_away #E2
+# E3: The distance he drove back is the distance he drove back at 30mph, plus the distance he drove back at 80mph.
+# E4: The distance he drove back at 30mph is 30mph times half an hour.
+first_distance_back = 30*(0.5) #E4
+# E5: The distance he drove back at 80mph is 80mph times his remaining time.
+# E6: His remaining time is 4 hours, minus 2 hours in standstill traffic, minus 30 minutes at 30mph.
+remaining_time = 4 - 2- 0.5 #E6
+second_distance_back = 80*remaining_time #E5
+distance_back = first_distance_back + second_distance_back #E3
+distance_from_home = distance_away - distance_back #E1
+ans = distance_from_home

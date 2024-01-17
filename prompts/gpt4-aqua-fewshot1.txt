@@ -56,11 +56,14 @@ for number in [36, 15, 17, 5, 7]:
 
 # Solution: 
 # Q1: What is the greatest possible probability that neither stock increases?
-# E1: This is 1 minus the probability that Stock A increases, minus the probability that Stock B increases, plus the probability that both increase.
+# E1: This is 1 minus the minimum probability that either stock increases.
+# Q2: What is the minimum probability that either stock increases?
+# E2: By the Principle of Inclusion and Exclusion, this is p(Stock A increases), plus p(Stock B increases), minus the maximum possible p(both increase).
 p_a_increase = 0.56
 p_b_increase = 0.74
-# Q2: What is the greatest possible probability that both stocks increase?
-# E2: This is at most the minimum of the two probabilities.
-greatest_p_both = min(p_a_increase, p_b_increase) #E2
-greatest_p_neither = 1 - p_a_increase - p_b_increase + greatest_p_both #E1
+# Q3: What is the greatest possible probability that both stocks increase?
+# E3: This is at most the minimum of the two probabilities.
+greatest_p_both = min(p_a_increase, p_b_increase) #E3
+min_p_either = p_a_increase + p_b_increase - greatest_p_both #E2
+greatest_p_neither = 1 - min_p_either #E1
 ans = greatest_p_neither
