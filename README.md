@@ -19,7 +19,8 @@
  | majority answer from 5 runs | GPT 3.5 | 8 | 76% | 100% | 100 | |
   | 4-shot from previously incorrect | GPT 4 | 4 | 100% | 100% | 10 | 2:27 |
   | learning from mistakes, rerun until agree | GPT 3.5 | variable | 80% | 100% | 1306 | 3:00:40 |
-  | best of 5 with prompts for uncertainty | GPT 3.5 | up to 16 | 80.4% | 100% | 684 | (including writing time)|
+  | majority answer with prompts for uncertainty | GPT 3.5 | up to 16 | 80.4% | 100% | 684 | (including writing time)|
+  | majority answer with GPT-4 generated prompts for uncertainty | GPT 3.5 | up to 10 | 81.9% | 100% | 698 ||
 
 
 
