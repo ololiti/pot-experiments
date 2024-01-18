@@ -1,0 +1,52 @@
+# Question: Janet’s ducks lay 16 eggs per day. She eats three for breakfast every morning and bakes muffins for her friends every day with four. She sells the remainder at the farmers' market daily for $2 per fresh duck egg. How much in dollars does she make every day at the farmers' market?
+
+# Solution:
+# We want to find her total profit.
+# We are given the following information:
+eggs_per_day = 16
+breakfast_eggs = 3
+muffin_eggs = 4
+price_per_egg = 2
+# Her total profit is the eggs remaining after cooking, times the price per egg.
+eggs_remaining = eggs_per_day - breakfast_eggs - muffin_eggs
+profit = price_per_egg*eggs_remaining
+ans = profit
+
+# Question: A robe takes 2 bolts of blue fiber and half that much white fiber.  How many bolts in total does it take?
+
+# Solution:
+# We want to find the total number of bolts.
+# We know the following information:
+blue_fiber = 2
+# The number of bolts of white fiber equals half the number of bolts of blue fiber.
+white_fiber = blue_fiber/2 
+# The total number of bolts is the amount of blue fiber plus the amount of white fiber.
+total_fiber = blue_fiber + white_fiber 
+ans = total_fiber
+
+
+# Question: Josh decides to try flipping a house.  He buys a house for $80,000 and then puts in $50,000 in repairs.  This increased the value of the house by 150%.  How much profit did he make?
+
+# Solution:
+# We want to find his total profit.
+# We know the following information:
+house_cost = 80000
+repair_cost = 50000
+value_increase_percent = 150
+# His total profit is the new value of the house minus his total cost.
+# The new value of the house is the original cost, plus the amount it increased in value.
+house_increase = (value_increase_percent/100)*house_cost
+new_house_value = house_cost + house_increase
+profit = new_house_value - (house_cost + repair_cost)
+ans = profit
+
+# Question: James decides to run 3 sprints 3 times a week.  He runs 60 meters each sprint.  How many total meters does he run a week?
+
+# Solution:
+# We want to find the total meters per week.
+# We know the following information:
+sprints_per_week = 3*3
+meters_per_sprint = 60
+# The meters per week is the sprints per week times the meters per sprint.
+meters_per_week = sprints_per_week*meters_per_sprint
+ans = meters_per_sprint

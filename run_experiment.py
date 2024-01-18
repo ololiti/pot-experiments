@@ -16,7 +16,7 @@ parser.add_argument("--data_file", default="gsm8K.json", type=str)
 parser.add_argument("--num_examples", default=5, type=int)
 parser.add_argument("--verbose", default=False, type=bool)
 parser.add_argument("--system_prompt", default="gpt4-system0.txt", type=str)
-parser.add_argument("--example_prompt", default="gpt3-gsm8k-fewshot0.txt", type=str)
+parser.add_argument("--example_prompt", default="gsm8k-new2shot.txt", type=str)
 parser.add_argument("--mode", default="normal", type=str)
 parser.add_argument("--teacher_prompt", default="gpt3-teacher-prompt2.txt", type=str)
 parser.add_argument("--mistake_prompt", default="gpt4-mistake-prompt.txt", type=str)
@@ -213,12 +213,12 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
     total = len(test_data)
     correct = 0
     non_null = 0
-    gpt4_queries = 0
+    queries = 0
     system_prompt = prompts[0]
     ex_prompt = prompts[1]
     examples_in_ex_prompt = 2
 
-    with open(f"prompts/examples-from-incorrect-gsm8k.txt", 'r') as f:
+    with open(f"prompts/gsm8k-new4shot.txt", 'r') as f:
         other_ex_prompt = f.read()
 
     print(f"num examples: {len(test_data)}")
@@ -286,7 +286,7 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
             if examples_in_ex_prompt < 10 and frequency <= 0.4*reruns:
                 new_user_prompt = generate_example(other_ex_prompt, example)
                 gpt4_result = ask_gpt(system_prompt, new_user_prompt, model="gpt-4")
-                gpt4_queries += 1
+                queries += 1
                 new_ans = safe_execute(gpt4_result, verbose)
                 if verbose:
                     print("")
@@ -297,14 +297,17 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
                     ex_prompt = f"{ex_prompt}\n\n# Question: {example['question']}\n\n# Solution:\n{gpt4_result}"
                     print(gpt4_result)
                     examples_in_ex_prompt += 1
-                    executed_ans = new_ans
+                    # executed_ans = new_ans
         elif mode == "hf":
-            if examples_in_ex_prompt < 8 and frequency < 0.4*reruns:
+            if examples_in_ex_prompt < 16 and frequency <= 0.4*reruns:
                 new_result = ask_with_feedback(system_prompt, user_prompt, example['question'], result)
+                queries += 1
                 new_ans = safe_execute(new_result, verbose)
                 if new_ans is not None:
                     ex_prompt = f"{ex_prompt}\n\n# Question: {example['question']}\n\n# Solution:\n{new_result}"
                     examples_in_ex_prompt += 1
+                    print(new_ans)
+                    print(f"expecting: {example['answer']}")
                     executed_ans = new_ans
         
         if executed_ans is not None:
@@ -315,7 +318,7 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
     
         
         total += 1
-        progress.set_postfix({"accuracy": correct/total, "non-null": non_null/total, "gpt-4 queries": gpt4_queries}, refresh=True)
+        progress.set_postfix({"accuracy": correct/total, "non-null": non_null/total, "external queries": queries}, refresh=True)
         writer.write(json.dumps(tmp) + '\n')
     writer.write(json.dumps({"final example prompt": ex_prompt}))
     writer.close()
@@ -324,7 +327,9 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
     print(f"percent executed: {non_null/total}")
 
 if __name__ == "__main__":
-    test_data = load_data(args.data_file)[13:13+args.num_examples]
+    test_data = load_data(args.data_file)
+    if args.num_examples > 0:
+        test_data = test_data[13:13+args.num_examples]
     prompts = load_prompt(args.system_prompt, args.example_prompt)
     run_test(args.verbose, args.name, test_data, prompts, args.best_of, args.mode, teacher_file=args.teacher_prompt, mistake_file=args.mistake_prompt)
 

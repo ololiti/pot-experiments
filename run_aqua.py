@@ -312,6 +312,14 @@ def run_test(verbose, name, test_data, prompts, reruns, mode, **kwargs):
                 if new_ans is not None and new_ans != executed_ans:
                     ex_prompt = f"# Question: {example['question']}\n\n# Solution:\n{gpt4_result}\n\n{ex_prompt}"
                     examples_in_ex_prompt += 1
+        elif mode == "hf":
+            if examples_in_ex_prompt < 10 and frequency < 0.4*reruns:
+                new_result = ask_with_feedback(system_prompt, user_prompt, example['question'], result)
+                new_ans = safe_execute(new_result, verbose)
+                if new_ans is not None:
+                    ex_prompt = f"{ex_prompt}\n\n# Question: {example['question']}\n\n# Solution:\n{new_result}"
+                    examples_in_ex_prompt += 1
+                    executed_ans = new_ans
         
         selected_choice = 'A'
         if executed_ans is not None:
